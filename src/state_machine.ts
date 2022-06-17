@@ -18,7 +18,7 @@ export class StateMachine<T, R> implements IStateMachine<T, R> {
     return this;
   }
 
-  transitions(...args) {
+  transitions(...args: StateTransition<T, R>[]) {
     this.definition = this.definition.concat(args);
     return this;
   }
@@ -47,7 +47,7 @@ export class StateMachine<T, R> implements IStateMachine<T, R> {
 
   subscribeOn(state: T) {
     return {
-      then: (fn) => {
+      then: (fn: Function) => {
         this.subscribers.push({ state, fn });
         return this;
       },

@@ -1,0 +1,29 @@
+{
+  "name": "state-machine",
+  "version": "0.0.1",
+  "description": "a simple state machine",
+  "main": "index.js",
+  "directories": {
+    "example": "examples"
+  },
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lptai/state-machine.git"
+  },
+  "keywords": [
+    "state-machine"
+  ],
+  "author": "taile",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/lptai/state-machine/issues"
+  },
+  "homepage": "https://github.com/lptai/state-machine#readme",
+  "devDependencies": {
+    "ts-node": "^10.8.1",
+    "typescript": "^4.7.3"
+  }
+}

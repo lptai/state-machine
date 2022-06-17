@@ -19,18 +19,16 @@ export const twoStepApprovalFlow = new StateMachine<
 >()
   .configure(TwoStepApprovalStatus.Pending)
   .transitions(
-    StateTransition.with<TwoStepApprovalStatus, Trigger>(
-      TwoStepApprovalStatus.Pending,
-    )
+    StateTransition.init<TwoStepApprovalStatus, Trigger>()
+      .with(TwoStepApprovalStatus.Pending)
       .when(Trigger.Approve)
       .nextState(TwoStepApprovalStatus.PendingApproval)
       .when(Trigger.Reject)
       .nextState(TwoStepApprovalStatus.Rejected),
   )
   .transitions(
-    StateTransition.with<TwoStepApprovalStatus, Trigger>(
-      TwoStepApprovalStatus.PendingApproval,
-    )
+    StateTransition.init<TwoStepApprovalStatus, Trigger>()
+      .with(TwoStepApprovalStatus.Pending)
       .when(Trigger.Approve)
       .nextState(TwoStepApprovalStatus.Approved)
       .when(Trigger.Reject)

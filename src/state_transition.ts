@@ -4,12 +4,13 @@ export class StateTransition<T, R> {
   private _state: T;
   private _next: StateTrigger<T, R>[] = [];
 
-  private constructor(state: T) {
-    this._state = state;
+  static init<T, R>(): StateTransition<T, R> {
+    return new this();
   }
 
-  static with<T, R>(state: T): StateTransition<T, R> {
-    return new this(state);
+  with(state: T): StateTransition<T, R> {
+    this._state = state;
+    return this;
   }
 
   get state() {
