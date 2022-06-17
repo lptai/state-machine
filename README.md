@@ -15,6 +15,11 @@ export const simpleWorkFlow = new StateMachine<Status, TriggerAction>()
       .when(TriggerAction.Reject)
       .nextState(Status.Deleted)
   )
+```
+
+- Then subscribe on `state`
+
+```js
   .subscribeOn(Status.Deleted)
   .then((oldState: Status, action: TriggerAction, newState: Status) =>
     console.log(
@@ -25,21 +30,6 @@ export const simpleWorkFlow = new StateMachine<Status, TriggerAction>()
   .then(() => console.log('Just another subscriber of Rejected'))
   .subscribeOn(Status.Ready)
   .then(() => console.log('this is approved subscriber'));
-
-simpleWorkFlow.next(TriggerAction.Reject);
-console.log(simpleWorkFlow.state);
-simpleWorkFlow.next(TriggerAction.Approve);
-console.log(simpleWorkFlow.state);
-
-simpleWorkFlow.transitions(
-  StateTransition.init<Status, TriggerAction>()
-    .with(Status.Deleted)
-    .when(TriggerAction.Approve)
-    .nextState(Status.Ready)
-);
-
-simpleWorkFlow.next(TriggerAction.Approve);
-console.log(simpleWorkFlow.state);
 ```
 
 - output
@@ -53,7 +43,11 @@ simpleWorkFlow.next(TriggerAction.Reject);
 console.log(simpleWorkFlow.state); // Deleted
 simpleWorkFlow.next(TriggerAction.Approve);
 console.log(simpleWorkFlow.state); // Deleted
+```
 
+- If you want to add more transition
+
+```js
 simpleWorkFlow.transitions(
   StateTransition.init<Status, TriggerAction>()
     .with(Status.Deleted)
