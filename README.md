@@ -20,6 +20,7 @@ export const simpleWorkFlow = new StateMachine<Status, TriggerAction>()
 - Then subscribe on `state`
 
 ```js
+  simpleWorkFlow
   .subscribeOn(Status.Deleted)
   .then((oldState: Status, action: TriggerAction, newState: Status) =>
     console.log(
